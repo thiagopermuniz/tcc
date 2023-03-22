@@ -8,7 +8,6 @@ from pymongo import MongoClient
 DATABASE = sys.argv[1] # 'mongodb' ou 'mysql'
 FILE = sys.argv[2] # local do arquivo xlsx
 #Exemplo de exec:  "$ python.exe popula_database.py mongodb base-teste.xlsx"
-print('base selecionada: ' + DATABASE)
 
 # lê arquivo excel (xlsx)
 df = pd.read_excel(FILE)
