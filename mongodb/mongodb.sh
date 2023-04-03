@@ -4,4 +4,4 @@ docker run -d \
   -p 27017:27017 \
   --cpus=1 \
   --memory=2g \
-  mongo:latest
+  mongo:6.0.5

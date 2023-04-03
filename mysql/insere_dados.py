@@ -1,13 +1,11 @@
 import requests
 import json
+import time
 import mysql.connector
 
-# busca dados da API IBGE
-url = "https://servicodados.ibge.gov.br/api/v1/localidades/regioes"
-
-response = requests.get(
-    url, verify='/home/thiago/projects/tcc/mysql/ibge-gov-br.pem')
-
+# busca dados da API de distritos do IBGE
+url = "https://servicodados.ibge.gov.br/api/v1/localidades/distritos"
+response = requests.get(url)
 json_list = response.json()
 
 # conecta na base
@@ -19,15 +17,25 @@ cnx = mysql.connector.connect(
 )
 cursor = cnx.cursor()
 
-
 # insere dados
 try:
-
-    json_obj = {"name": "John", "age": 30, "city": "New York"}
-    json_str = json.dumps(json_obj)
-    sql = "INSERT INTO tabela (json_data) VALUES (%s)"
-    val = (json_str,)
-    cursor.execute(sql, val)
+    start_time = time.time()
+    for json_obj in json_list:
+        json_str = json.dumps(json_obj)
+        sql = "INSERT INTO DISTRITOS (distrito) VALUES (%s)"
+        val = (json_str,)
+        cursor.execute(sql, val)
+        cnx.commit()
+    end_time = time.time()
+    elapsed_time = end_time - start_time
+    print(f"{len(json_list)} registros: tempo insert: {elapsed_time} secs")
+# limpa tabela
+    cursor.execute("DELETE FROM DISTRITOS")
     cnx.commit()
+# fecha con
+    cursor.close()
+    cnx.close()
+
 except Exception as err:
     print(err)
+
