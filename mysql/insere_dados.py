@@ -5,7 +5,7 @@ import mysql.connector
 
 
 def insere_registros(registros, qtd_execucoes):
-    # conecta ao banco de dados mysql
+    #conecta ao banco de dados mysql
     cnx = mysql.connector.connect(
         host='localhost',
         port='3306',
@@ -14,7 +14,7 @@ def insere_registros(registros, qtd_execucoes):
     )
     cursor = cnx.cursor()
 
-    # executa os inserts e calcula o tempo médio total
+    #executa os inserts e calcula o tempo médio total
     tempo_total = 0
     for i in range(qtd_execucoes):
         try:
@@ -32,7 +32,7 @@ def insere_registros(registros, qtd_execucoes):
 
             print(f"{len(registros)} registros (execução {i+1}/{qtd_execucoes}): tempo insert: {tempo_execucao} secs")
             
-            # Limpa tabela
+            #limpa todos os registros da tabela
             cursor.execute("DELETE FROM DISTRITOS")
             cnx.commit()
 
