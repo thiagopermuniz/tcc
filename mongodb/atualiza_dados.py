@@ -5,11 +5,25 @@ from pymongo import MongoClient
 
 
 def popula_banco_dados():
-    # ... existing code for populating the database ...
+    # conecta ao banco de dados mongodb
+    client = MongoClient('mongodb://localhost:27017/')
+    db = client.db
+    collection = db.distritos
 
+    # busca dados da API de distritos do IBGE
+    url = "https://servicodados.ibge.gov.br/api/v1/localidades/distritos"
+    response = requests.get(url)
+    json_list = response.json()
 
-def busca_registros(qtd_execucoes, qtd_registros):
-    # ... existing code for querying records ...
+    try:
+        # insere os registros na coleção de distritos
+        for registro in json_list:
+            collection.insert_one(registro)
+    except Exception as err:
+        print(err)
+
+    # fecha conexão
+    client.close()
 
 
 def atualiza_registros(qtd_execucoes, qtd_registros):
@@ -53,9 +67,6 @@ qtd_registros_tarefa = [100, 1000, 5000, 10000]
 # popula a coleção de distritos com os dados da API do IBGE
 popula_banco_dados()
 
-# busca registros para cada quantidade de registros na lista qtd_registros_tarefa
-for qtd_registros in qtd_registros_tarefa:
-    busca_registros(qtd_execucoes, qtd_registros)
 
 # atualiza registros para cada quantidade de registros na lista qtd_registros_tarefa
 for qtd_registros in qtd_registros_tarefa:
