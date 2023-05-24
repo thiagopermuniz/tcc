@@ -1,7 +1,6 @@
-docker run -it --rm \
-    --name my_python_container \
-    --cpus=1 \
+docker run --name python_container \
+    --cpus=2 \
     --memory=2g \
-    -v /cria_tabela.py:/app/cria_tabela.py \
-    -v /popula_tabela.py:/app/popula_tabela.py \
+    -v /mongodb:/app/mongodb \
+    -v /mysql:/app/mysql \
     python:latest 
