@@ -57,7 +57,8 @@ def atualiza_registros(qtd_execucoes, qtd_registros):
             results = cursor.fetchall()
             
             for result in results:
-                registro = json.loads(result[0])
+                registro_json = result[0]
+                registro = json.loads(registro_json)
                 registro['distrito'] = 'New Name'
                 updated_registro = json.dumps(registro)
                 
