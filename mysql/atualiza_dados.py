@@ -57,14 +57,14 @@ def atualiza_registros(qtd_execucoes, qtd_registros):
             results = cursor.fetchall()
             
             for result in results:
-                registro_json = result[0]
+                registro_json = result[1]
                 print(registro_json)
-                print(result)
-                registro = json.loads(registro_json.decode('utf-8'))
+
+                registro = json.loads(registro_json)
                 registro['distrito'] = 'New Name'
                 updated_registro = json.dumps(registro)
                 
-                sql = "UPDATE DISTRITOS SET distrito = %s WHERE distrito = %s"
+                sql = "UPDATE DISTRITOS SET distrito = %s WHERE id = %s"
                 val = (updated_registro, result[0])
                 cursor.execute(sql, val)
                 cnx.commit()
