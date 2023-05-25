@@ -41,7 +41,9 @@ def atualiza_registros(qtd_execucoes, qtd_registros):
             # Execute the update on records in the collection
             # For example, let's update the 'nome' field of the first 'qtd_registros' records
             for registro in collection.find().limit(qtd_registros):
-                registro['nome'] = 'New Name'
+                registro['nome'] = 'Novo Nome Distrito'
+                registro['municipio']['nome'] = 'Novo Nome Municipio'
+                registro['municipio']['microrregiao']['nome'] = 'Novo Nome Microregiao'
                 collection.replace_one({'_id': registro['_id']}, registro)
 
             end_time = time.time()
