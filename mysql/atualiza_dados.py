@@ -58,7 +58,9 @@ def atualiza_registros(qtd_execucoes, qtd_registros):
             
             for result in results:
                 registro_json = result[0]
-                registro = json.loads(registro_json)
+                print(registro_json)
+                print(result)
+                registro = json.loads(registro_json.decode('utf-8'))
                 registro['distrito'] = 'New Name'
                 updated_registro = json.dumps(registro)
                 
