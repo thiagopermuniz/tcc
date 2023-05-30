@@ -5,7 +5,7 @@ import mysql.connector
 
 
 def insere_registros(registros, qtd_execucoes):
-    #conecta ao banco de dados mysql
+    # conecta ao banco de dados mysql
     cnx = mysql.connector.connect(
         host='localhost',
         port='3306',
@@ -14,7 +14,7 @@ def insere_registros(registros, qtd_execucoes):
     )
     cursor = cnx.cursor()
 
-    #executa os inserts e calcula o tempo médio total
+    # executa os inserts e calcula o tempo médio total
     tempo_total = 0
     for i in range(qtd_execucoes):
         try:
@@ -47,16 +47,16 @@ def insere_registros(registros, qtd_execucoes):
     print(f"Tempo médio para inserir {len(registros)} registros: {tempo_medio} segundos")
 
 
-#quantidade de execuções e registros por teste
+# quantidade de execuções e registros por teste
 qtd_execucoes = 10
 qtd_registros_tarefa = [100, 1000, 5000, 10000]
 
-#busca dados da API de distritos do IBGE
+# busca dados da API de distritos do IBGE
 url = "https://servicodados.ibge.gov.br/api/v1/localidades/distritos"
 response = requests.get(url)
 json_list = response.json()
 
-#insere os registros para cada quantidade de registros na lista qtd_registros_tarefa
+# insere os registros para cada quantidade de registros na lista qtd_registros_tarefa
 for qtd_registros in qtd_registros_tarefa:
     registros = json_list[:qtd_registros]
     insere_registros(registros, qtd_execucoes)
