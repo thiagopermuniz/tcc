@@ -29,7 +29,7 @@ def popula_banco_dados():
             cnx.commit()
     except Exception as err:
         print(err)
-    # fecha conexão
+    # fecha conexão com o banco de dados
     cursor.close()
     cnx.close()
 
@@ -61,7 +61,7 @@ def busca_registros(qtd_execucoes, qtd_registros):
         except Exception as err:
             print(err)
 
-    # fecha conexão
+    # fecha conexão com o banco de dados
     cursor.close()
     cnx.close()
 

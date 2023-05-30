@@ -39,7 +39,7 @@ def insere_registros(registros, qtd_execucoes):
         except Exception as err:
             print(err)
 
-    #fecha conexão
+    # fecha conexão com o banco de dados
     cursor.close()
     cnx.close()
 

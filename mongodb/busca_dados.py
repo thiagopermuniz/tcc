@@ -22,7 +22,7 @@ def popula_banco_dados():
     except Exception as err:
         print(err)
 
-    # fecha conexão
+     # fecha a conexão com o banco de dados
     client.close()
 
 
@@ -50,7 +50,7 @@ def busca_registros(qtd_execucoes, qtd_registros):
         except Exception as err:
             print(err)
 
-    # fecha conexão
+     # fecha a conexão com o banco de dados
     client.close()
 
     tempo_medio = tempo_total / qtd_execucoes

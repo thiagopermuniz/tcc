@@ -27,19 +27,17 @@ def popula_banco_dados():
 
 
 def atualiza_registros(qtd_execucoes, qtd_registros):
-    # Connect to the MongoDB database
+    # conecta ao banco de dados mysql
     client = MongoClient('mongodb://localhost:27017/')
     db = client.db
     collection = db.distritos
 
-    # Execute the updates and calculate the total average time
+    # executa as atualizações e mede o tempo
     tempo_total = 0
     for i in range(qtd_execucoes):
         try:
             start_time = time.time()
 
-            # Execute the update on records in the collection
-            # For example, let's update the 'nome' field of the first 'qtd_registros' records
             for registro in collection.find().limit(qtd_registros):
                 registro['nome'] = 'Novo Nome Distrito'
                 registro['municipio']['nome'] = 'Novo Nome Municipio'
@@ -55,7 +53,7 @@ def atualiza_registros(qtd_execucoes, qtd_registros):
         except Exception as err:
             print(err)
 
-    # Close the connection
+    # fecha a conexão com o banco de dados
     client.close()
 
     tempo_medio = tempo_total / qtd_execucoes

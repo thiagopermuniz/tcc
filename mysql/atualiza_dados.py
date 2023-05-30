@@ -29,13 +29,13 @@ def popula_banco_dados():
             cnx.commit()
     except Exception as err:
         print(err)
-    # fecha conexão
+    # fecha conexão com o banco de dados
     cursor.close()
     cnx.close()
 
 
 def atualiza_registros(qtd_execucoes, qtd_registros):
-    # Connect to the MySQL database
+    # conecta ao banco de dados mysql
     cnx = mysql.connector.connect(
         host='localhost',
         port='3306',
@@ -44,18 +44,16 @@ def atualiza_registros(qtd_execucoes, qtd_registros):
     )
     cursor = cnx.cursor()
 
-    # Execute the updates and calculate the total average time
     tempo_total = 0
     for i in range(qtd_execucoes):
         try:
-            start_time = time.time()
             
-            # Execute the update on records in the table
-            # For example, let's update the 'distrito' column of the first 'qtd_registros' records
+            # busca os registros que serão modificados
             sql = f"SELECT * FROM DISTRITOS LIMIT {qtd_registros}"
             cursor.execute(sql)
             results = cursor.fetchall()
             
+            start_time = time.time()
             for result in results:
                 registro_json = result[1]
 
@@ -79,7 +77,7 @@ def atualiza_registros(qtd_execucoes, qtd_registros):
         except Exception as err:
             print(err)
     
-    # Close the connection
+    # fecha conexão com o banco de dados
     cursor.close()
     cnx.close()
     
