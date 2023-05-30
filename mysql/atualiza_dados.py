@@ -58,14 +58,15 @@ def atualiza_registros(qtd_execucoes, qtd_registros):
             
             for result in results:
                 registro_json = result[1]
-                print(registro_json)
 
                 registro = json.loads(registro_json)
-                registro['distrito'] = 'New Name'
-                updated_registro = json.dumps(registro)
+                registro['nome'] = 'Novo Nome Distrito'
+                registro['municipio']['nome'] = 'Novo Nome Municipio'
+                registro['municipio']['microrregiao']['nome'] = 'Novo Nome Microregiao'
+                registro_atualizado = json.dumps(registro)
                 
                 sql = "UPDATE DISTRITOS SET distrito = %s WHERE id = %s"
-                val = (updated_registro, result[0])
+                val = (registro_atualizado, result[0])
                 cursor.execute(sql, val)
                 cnx.commit()
             
