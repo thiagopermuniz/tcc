@@ -49,7 +49,7 @@ def insere_registros(registros, qtd_execucoes):
 
 # quantidade de execuções e registros por teste
 qtd_execucoes = 10
-qtd_registros_tarefa = [100, 1000, 5000, 10000]
+qtd_registros_tarefa = [10, 100, 1000, 10000]
 
 # busca dados da API de distritos do IBGE
 url = "https://servicodados.ibge.gov.br/api/v1/localidades/distritos"

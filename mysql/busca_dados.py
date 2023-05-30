@@ -71,7 +71,7 @@ def busca_registros(qtd_execucoes, qtd_registros):
 
 # quantidade de execuções e registros por teste
 qtd_execucoes = 100
-qtd_registros_tarefa = [100, 1000, 5000, 10000]
+qtd_registros_tarefa = [10, 100, 1000, 10000]
 
 # popula a tabela de distritos com os dados da API do IBGE
 popula_banco_dados()
