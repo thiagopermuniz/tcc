@@ -19,6 +19,9 @@ def popula_banco_dados():
     response = requests.get(url)
     json_list = response.json()
 
+    #limpa todos os registros da tabela
+    cursor.execute("DELETE FROM DISTRITOS")
+    cnx.commit()
     try:
         # insere os registros na tabela de distritos
         for registro in json_list:
