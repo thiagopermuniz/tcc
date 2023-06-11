@@ -36,9 +36,10 @@ def atualiza_registros(qtd_execucoes, qtd_registros):
     tempo_total = 0
     for i in range(qtd_execucoes):
         try:
-            start_time = time.time()
+            registros = collection.find().limit(qtd_registros)
 
-            for registro in collection.find().limit(qtd_registros):
+            start_time = time.time()
+            for registro in registros:
                 registro['nome'] = 'Novo Nome Distrito'
                 registro['municipio']['nome'] = 'Novo Nome Municipio'
                 registro['municipio']['microrregiao']['nome'] = 'Novo Nome Microregiao'
