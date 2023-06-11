@@ -19,9 +19,10 @@ def insere_dados_mongodb(json_list, qtd_execucoes, tam_lista_registro):
                 json_dict = json.loads(json.dumps(json_obj))
                 collection.insert_one(json_dict)
             end_time = time.time()
-            elapsed_time = end_time - start_time
-            total_time += elapsed_time
-            print(f"{tam_lista_registro} registros (execução {i+1}/{qtd_execucoes}): tempo insert: {elapsed_time} secs")
+            tempo_execucao = end_time - start_time
+            tempo_total += tempo_execucao
+
+            print(f"{tam_lista_registro} registros (execução {i+1}/{qtd_execucoes}): tempo insert: {tempo_execucao} secs")
             # limpa coleção
             collection.drop()
         except Exception as err:
@@ -31,7 +32,7 @@ def insere_dados_mongodb(json_list, qtd_execucoes, tam_lista_registro):
     client.close()
 
     # calcula tempo médio
-    media_tempo = total_time / qtd_execucoes
+    media_tempo = tempo_total / qtd_execucoes
     print(f"Tempo médio para inserir {tam_lista_registro} registros: {media_tempo} segundos")
 
 
